@@ -12,7 +12,7 @@ builds:
   goarm:
   - "6"
   main: .
-  ldflags: -s -w -X main.version={{.Version}} -X main.gitRef={{.Commit}}
+  ldflags: -s -w -X -X main.gitRef={{.Commit}}
   binary: yaum
 archive:
   format: tar.gz
