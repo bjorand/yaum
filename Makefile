@@ -7,5 +7,5 @@ build:
 release:
 	goreleaser --rm-dist
 
-deploy:
+ansible:
 	ansible-playbook -i deploy/ansible/hosts deploy/ansible/deploy.yml
