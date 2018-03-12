@@ -3,7 +3,7 @@
   become: true
   become_user: root
   vars:
-    version: "1.0.0"
+    version: "1.0.1"
   handlers:
     - name: reload systemd
       command: systemctl daemon-reload
@@ -16,10 +16,10 @@
     - name: download release
       get_url:
         url: "https://github.com/bjorand/yaum/releases/download/{{version}}/yaum_{{version}}_linux_amd64.tar.gz"
-        dest: /yaum/current.tar.gz
+        dest: /yaum/current-{{version}}.tar.gz
       register: new_download
     - name: decompress release
-      command: /bin/tar -C /yaum/current -xf /yaum/current.tar.gz
+      command: /bin/tar -C /yaum/current -xf /yaum/current-{{version}}.tar.gz
       when: new_download|changed
       register: new_release
     - name: service file
