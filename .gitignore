@@ -1,2 +1,5 @@
 vendor
 yaum
+deploy/terraform/terraform.tfstate
+deploy/terraform/terraform.tfstate.backup
+deploy/terraform/.terraform

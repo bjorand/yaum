@@ -28,7 +28,7 @@ Configuration is read from environment variables. Below is the list of available
 |---|---|---|
 | REDIS_ADDR | `localhost:6379` | Redis address | 
 | REDIS_PASSWORD | empty | Redis address | 
-| LOG_LEVEL | `DEBUG` | Log level. One of `INFO`, `DEBUG`|
+| LOG_LEVEL | `DEBUG` | Log level. One of `DEBUG`, `INFO`, `WARNING`, `ERROR`|
 |||
 
 # Deployment
