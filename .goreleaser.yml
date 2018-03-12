@@ -21,6 +21,7 @@ archive:
   files:
   - LICENSE
   - README.md
+  - templates/*
 snapshot:
   name_template: SNAPSHOT-{{ .Commit }}
 checksum:

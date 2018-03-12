@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"os"
 	"strings"
 
@@ -14,10 +15,11 @@ var (
 	redisPassword = ""
 	redisDB       = 0
 	redisClient   *redis.Client
+	templatesDir  = flag.String("templates-dir", "templates", "Specify templates directory if needed")
 )
 
 func main() {
-
+	flag.Parse()
 	if os.Getenv("LISTEN_ADDR") != "" {
 		listenAddr = os.Getenv("LISTEN_ADDR")
 	}

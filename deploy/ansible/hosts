@@ -1,0 +1,2 @@
+[yaum-servers]
+yaum.intuxication.org ansible_user=admin

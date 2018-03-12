@@ -1,0 +1,31 @@
+---
+- hosts: yaum-servers
+  become: true
+  become_user: root
+  vars:
+    version: "1.0.0"
+  handlers:
+    - name: reload systemd
+      command: systemctl daemon-reload
+  tasks:
+    - apt: update_cache=yes
+    - apt: name="{{item}}"
+      with_items:
+        - redis-server
+    - file: path=/yaum/current state=directory
+    - name: download release
+      get_url:
+        url: "https://github.com/bjorand/yaum/releases/download/{{version}}/yaum_{{version}}_linux_amd64.tar.gz"
+        dest: /yaum/current.tar.gz
+    - name: decompress release
+      command: /bin/tar -C /yaum/current -xf ~admin/yaum_SNAPSHOT-d4f0b7ba946f5ea1f75411f98eb1c0a1e5d65312_linux_amd64.tar.gz
+    - name: service file
+      copy:
+        src: yaum.service
+        dest: /etc/systemd/system
+      notify: reload systemd
+    # - name: start yaum
+    #   systemd:
+    #     name: yaum.service
+    #     state: started
+    #     enabled: True

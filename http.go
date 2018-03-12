@@ -10,7 +10,7 @@ import (
 
 func ginEngine() *gin.Engine {
 	r := gin.Default()
-	r.LoadHTMLGlob("templates/*")
+	r.LoadHTMLGlob(fmt.Sprintf("%s/*", *templatesDir))
 	r.Use(location.Default())
 	r.GET("/:urlKey", func(c *gin.Context) {
 		urlKey := c.Param("urlKey")
