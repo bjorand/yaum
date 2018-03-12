@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gin-contrib/location"
+	"github.com/bjorand/location"
 	"github.com/gin-gonic/gin"
 )
 

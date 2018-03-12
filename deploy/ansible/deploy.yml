@@ -17,15 +17,23 @@
       get_url:
         url: "https://github.com/bjorand/yaum/releases/download/{{version}}/yaum_{{version}}_linux_amd64.tar.gz"
         dest: /yaum/current.tar.gz
+      register: new_download
     - name: decompress release
       command: /bin/tar -C /yaum/current -xf /yaum/current.tar.gz
+      when: new_download|changed
+      register: new_release
     - name: service file
       copy:
         src: yaum.service
         dest: /etc/systemd/system
       notify: reload systemd
-    # - name: start yaum
-    #   systemd:
-    #     name: yaum.service
-    #     state: started
-    #     enabled: True
+    - name: restart service on update
+      service:
+        name: yaum
+        state: restarted
+      when: new_release|changed
+    - name: ensure service is started
+      service:
+        name: yaum
+        state: started
+        enabled: True
