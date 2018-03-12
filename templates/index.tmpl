@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>YAUM Yet Another URL Minifier</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col offset-md-1 col-10">
+        <h1>YAUM <small>Yet Another URL Minifier</small></h1><br/>
+        <form  method="POST" action="">
+          <div class="form-group">
+            <input type="text" class="{{ if .validationError }}is-invalid{{ end }} form-control" id="url" aria-describedby="emailHelp" placeholder="http://..." name="url" value="{{ if .validationError }}{{ .url }}{{ end }}">
+            <small id="emailHelp" class="form-text text-muted">Enter the URL you want to mignify.</small>
+            {{ if .validationError }}
+            <div class="invalid-feedback">{{.validationError}}</div>
+            {{ end }}
+          </div>
+          <button type="submit" class="btn btn-primary">Generate minified URL</button>
+        </form>
+        {{ if .entry}}
+        <br/>
+        <div class="alert alert-primary text-center" role="alert">
+          <div class="btn-group btn-group-sm  float-right " role="group">
+            <a class="btn btn-outline-dark" href="#" onclick="copyToClipboard();">
+              Copy to clipboard
+            </a>
+            <a class="btn btn-outline-dark" href="{{ .entry.URL }}">
+              Visit
+            </a>
+          </div>
+          <h4>
+            {{.root}}/{{.entry.Minified}}
+          </h4>
+          <input type="text" style="display: none;" value="{{.root}}/{{.entry.Minified}}" id="entryURL">
+        </div>
+        {{end}}
+        <hr/>
+        <small>YAUM Yet Another URL Minifier |
+          <a href="http://github.com/bjorand/yaum">Source code</a>
+        </small>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+  function copyToClipboard() {
+    event.preventDefault();
+    var entryURL = $('#entryURL');
+    entryURL.css("display", "inline");
+    entryURL.select();
+    document.execCommand("Copy");
+    entryURL.css("display", "none");
+  }
+</script>
+</body>
+</html>
