@@ -3,7 +3,7 @@
   become: true
   become_user: root
   vars:
-    version: "1.0.1"
+    version: "1.0.2"
   handlers:
     - name: reload systemd
       command: systemctl daemon-reload
